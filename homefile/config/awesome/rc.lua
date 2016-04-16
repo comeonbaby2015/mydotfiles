@@ -21,7 +21,7 @@ require("util")
 beautiful.init("/usr/share/awesome/themes/zenburn/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "start-tmux"
+terminal = "start-tmux-on-ubuntu"
 editor = os.getenv("EDITOR") or "nano"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -107,7 +107,7 @@ layouts =
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9, "W", "F", "IM", "E", "T" }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9, "W", "F", "IM", "T" }, s, layouts[1])
 end
 -- }}}
 
@@ -373,18 +373,15 @@ globalkeys = awful.util.table.join(
 
     -- ================ BEGIN my custom keybindings. (crazycode) ================
 
-    awful.key({ modkey,           }, "Return", function () run_or_raise("start-tmux", { name = "tmux-main" }) end),
+    awful.key({ modkey,           }, "Return", function () run_or_raise("start-tmux-on-ubuntu", { name = "tmux-main" }) end),
 
     awful.key({ modkey,           }, "f", function () run_or_raise("firefox", { class = "Firefox" }) end),
-    awful.key({ modkey,           }, "w", function () run_or_raise("google-chrome", { class = "Google-chrome" }) end),
-    awful.key({ modkey,           }, "p", function () run_or_raise("pidgin", { class = "Pidgin" }) end),
+    awful.key({ modkey,           }, "w", function () run_or_raise("google-chrome", { class = "google-chrome" }) end),
+    -- awful.key({ modkey,           }, "p", function () run_or_raise("pidgin", { class = "Pidgin" }) end),
 
 
     -- CHANGE: 更好的dmenu
     awful.key({modkey }, "o", function() awful.util.spawn( "smart-dmenu" ) end),
-
-    -- CHANGE: 执行或转到Emacs所在的tag
-    awful.key({ modkey }, "e", function () run_or_raise("/usr/bin/emc", { class = "Emacs" }) end),
 
     -- Try IT!
     awful.key({ modkey }, "q",  revelation),
@@ -595,13 +592,10 @@ awful.rules.rules = {
     { rule = { class = "Quodlibet" },
       properties = { floating = true, tag = tags[1][2], switchtotag = true } },
     -- "T"
-    { rule = { name = "tmux-main" },
-      properties = { tag = tags[1][14], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
-    -- "E"
-    { rule = { class = "Emacs" },
+    { rule = { class = "XTerm" },
       properties = { tag = tags[1][13], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
     -- "W"
-    { rule = { class = "Google-chrome" },
+    { rule = { class = "google-chrome" },
       properties = { tag = tags[1][10], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
     { rule = { class = "Chromium" },
       properties = { tag = tags[secound_screen][2], switchtotag = true, maximized_vertical = true, maximized_horizontal = true } },
@@ -650,10 +644,10 @@ function clean_for_completion (command, cur_pos, ncomp, shell)
 end
 -- }}}
 
-util.run_once('dropbox', 'dropboxd')
--- util.run_once('nm-applet')
-util.run_once('pidgin')
+-- util.run_once('dropbox', 'dropboxd')
+util.run_once('nm-applet')
+-- util.run_once('pidgin')
 -- util.run_once('gol')
 
 -- run screen-saver when idle 10 minutes.
-util.run_once("xautolock -time 10 -locker 'xlock -lockdelay 15'")
+-- util.run_once("xautolock -time 10 -locker 'xlock -lockdelay 15'")

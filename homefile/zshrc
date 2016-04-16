@@ -4506,7 +4506,7 @@ fi
 
 alias v=vagrant
 
-export JAVA_HOME=/opt/jdk8
+export JAVA_HOME=/opt/jdk
 export M2_HOME=/opt/maven
 export MAVEN_OPTS="-Dmaven.artifact.threads=3 -Xmx768m"
 export PATH=$JAVA_HOME/bin:$PATH:$M2_HOME/bin
